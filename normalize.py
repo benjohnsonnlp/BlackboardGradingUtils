@@ -19,13 +19,13 @@ def normalize(filename, prefix, min_value, max_value, zero_strings=["Needs Gradi
                         pass
                     if element in zero_strings:
                         output = min_value
-                output_row.append(output)
+                output_row.append( str(output) )
 
             output_sheet.append(output_row)
 
         with open(output_filename, 'w') as o:
-            writer = csv.writer(o, delimiter=",")
-            writer.writerow([item for item in header])
+            writer = csv.writer(o, delimiter=",", quoting=csv.QUOTE_NONNUMERIC)
+            writer.writerow([str(item) for item in header])
             for row in output_sheet:
                 writer.writerow(row)
 
